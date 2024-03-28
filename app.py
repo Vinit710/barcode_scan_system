@@ -32,6 +32,8 @@ def capture_frames():
     cap.release()
     cv2.destroyAllWindows()
 
+    print("Captured Frames:", captured_frames)
+
     # Decode barcodes from the captured frames
     barcode_data = set()
     for frame in captured_frames:
@@ -45,7 +47,7 @@ def capture_frames():
         for data in barcode_data:
             writer.writerow([data, user_name])
 
-    messagebox.showinfo("Success", "User registered!")
+    messagebox.showinfo("Success", "User registered successfully!")
 
 # Create main window
 root = tk.Tk()
@@ -63,3 +65,4 @@ scan_button.pack(padx=10, pady=5)
 
 # Run the application
 root.mainloop()
+
