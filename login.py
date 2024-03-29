@@ -4,6 +4,8 @@ import cv2
 from pyzbar.pyzbar import decode
 import csv
 
+
+
 def capture_frames():
     cap = cv2.VideoCapture(0)
     if not cap.isOpened():
@@ -29,9 +31,7 @@ def capture_frames():
     
     # Decode barcodes from the captured frame
     decoded_objects = decode(frame)
-    barcode_data = set()
-    for obj in decoded_objects:
-        barcode_data.add(obj.data.decode("utf-8"))
+    barcode_data = {obj.data.decode("utf-8") for obj in decoded_objects}
     
     print("Scanned Barcodes:", barcode_data)
     
@@ -43,17 +43,18 @@ def capture_frames():
     with open('barcodes.csv', mode='r') as file:
         reader = csv.reader(file)
         for row in reader:
-            try:
-                if len(row) >= 2 and row[1] == user_name and row[0] in barcode_data:
+            if len(row) >= 2:
+                csv_user_name, csv_barcode = map(str.strip, row)
+                print("CSV Data:", csv_user_name, csv_barcode)  # Debug print
+                if csv_user_name == user_name and csv_barcode in barcode_data:
                     access_allowed = True
                     break
-            except IndexError:
-                pass
     
     if access_allowed:
         messagebox.showinfo("Access Granted", "User access allowed!")
     else:
         messagebox.showerror("Access Denied", "Access denied!")
+
 
 # Create main window
 root = tk.Tk()
