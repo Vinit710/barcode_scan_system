@@ -42,12 +42,14 @@ def capture_frames():
             barcode_data.add(obj.data.decode("utf-8"))
 
     # Save the barcode data to a CSV file
-    with open('barcodes.csv', mode='a', newline='') as file:
-        writer = csv.writer(file)
-        for data in barcode_data:
-            writer.writerow([data, user_name])
-
-    messagebox.showinfo("Success", "User registered successfully!")
+    try:
+        with open('barcodes.csv', mode='a', newline='') as file:
+            writer = csv.writer(file)
+            for data in barcode_data:
+                writer.writerow([data, user_name])
+        messagebox.showinfo("Success", "User registered successfully!")
+    except Exception as e:
+        messagebox.showerror("Error", f"Failed to save barcode data: {e}")
 
 # Create main window
 root = tk.Tk()
@@ -65,4 +67,3 @@ scan_button.pack(padx=10, pady=5)
 
 # Run the application
 root.mainloop()
-
