@@ -66,7 +66,11 @@ def capture_frames():
 
 # Create main window
 root = tk.Tk()
-root.title("User Access Control")
+root.title("Login")
+
+# Add title label
+title_label = tk.Label(root, text="Student Login", font=("Helvetica", 16, "bold"))
+title_label.pack(pady=10)
 
 # Create name entry
 name_label = tk.Label(root, text="Enter Your Name:")
@@ -74,8 +78,12 @@ name_label.pack(padx=10, pady=5)
 name_entry = tk.Entry(root)
 name_entry.pack(padx=10, pady=5)
 
+# Add instruction label
+instruction_label = tk.Label(root, text="Scan your college ID")
+instruction_label.pack(pady=5)
+
 # Create scan button
-scan_button = tk.Button(root, text="Scan Barcode", command=capture_frames)
+scan_button = tk.Button(root, text="Scan Barcode", command=capture_frames, bg="#4CAF50", fg="white", font=("Helvetica", 12, "bold"), padx=10, pady=5)
 scan_button.pack(padx=10, pady=5)
 
 # Run the application
