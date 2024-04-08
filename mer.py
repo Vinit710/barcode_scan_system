@@ -3,6 +3,7 @@ from tkinter import messagebox
 import cv2
 from pyzbar.pyzbar import decode
 import csv
+from PIL import Image, ImageTk, ImageFilter
 
 def register_user():
     # Create a new window for registration
@@ -133,16 +134,29 @@ def capture_frames(mode, name_entry):
 root = tk.Tk()
 root.title("Student System")
 
-# Add title label
-title_label = tk.Label(root, text="Student System", font=("Helvetica", 16, "bold"))
-title_label.pack(pady=10)
+# Load and process background image (increased blur)
+image = Image.open("clg.jpg")
+blurred_image = image.filter(ImageFilter.GaussianBlur(radius=10))  # Use GaussianBlur instead of BLUR
+photo = ImageTk.PhotoImage(blurred_image) 
 
-# Create buttons for registration and login (side by side with spacing)
-register_button = tk.Button(root, text="Register", command=register_user, bg="#4CAF50", fg="white", font=("Helvetica", 12, "bold"), padx=10, pady=5)
-register_button.pack(side=tk.LEFT, padx=10)
+# Create a label to display the background image
+background_label = tk.Label(root, image=photo)
+background_label.place(x=0, y=0, relwidth=1, relheight=1)
 
-login_button = tk.Button(root, text="Login", command=login_user, bg="#008CBA", fg="white", font=("Helvetica", 12, "bold"), padx=10, pady=5)
-login_button.pack(side=tk.LEFT)
+# Create a frame for the central tab (larger size)
+tab_frame = tk.Frame(root, bg="white", width=450, height=11350)  # Increase width and height further
+tab_frame.place(relx=0.5, rely=0.5, anchor=tk.CENTER)
+
+# Welcome label
+welcome_label = tk.Label(tab_frame, text="Welcome to the Website", font=("Helvetica", 14, "bold"), bg="white")
+welcome_label.pack(pady=10)
+
+# Create buttons for registration and login
+register_button = tk.Button(tab_frame, text="Register", command=register_user, bg="#4CAF50", fg="white", font=("Helvetica", 12, "bold"), padx=10, pady=5)
+register_button.pack(pady=5)
+
+login_button = tk.Button(tab_frame, text="Login", command=login_user, bg="#008CBA", fg="white", font=("Helvetica", 12, "bold"), padx=10, pady=5)
+login_button.pack(pady=5)
 
 # Run the application
 root.mainloop()
