@@ -4,6 +4,7 @@ import cv2
 from pyzbar.pyzbar import decode
 import csv
 from PIL import Image, ImageTk, ImageFilter
+from app_window import create_app_window  # Import the function
 
 def register_user():
     register_window = tk.Toplevel(root)
@@ -111,6 +112,7 @@ def login_user():
                         login_window.destroy()  # Close the login window
                         open_app_window(user_name)  # Open the app window
                         
+                        
                         return  # Exit the function if access is granted
 
         messagebox.showerror("Access Denied", "Access denied")
@@ -170,22 +172,20 @@ def capture_frames(mode, name_entry):
 
 
 def open_app_window(user_name):
-    root.destroy()  # Close the main window
-    global app_window  # Make app_window accessible outside the function 
-    app_window = tk.Tk()  # Create a new instance of Tk (the main window)
-    app_window.title("Student Login System")
-    app_window.state('zoomed')  # Maximize the windo
-
-    # Simple UI for the app window
-    welcome_label = tk.Label(app_window, text=f"Welcome, {user_name}!", font=("Helvetica", 14, "bold"))
-    welcome_label.pack(pady=20)
-
-
+    root.destroy()
+    global app_window
+    app_window = create_app_window(user_name)  # Create the app window
+    app_window.mainloop()  # Start the event loop for the app window
 
     
+
+
+
+
 # Create main window
 root = tk.Tk()
 root.title("Student System")
+root.state('zoomed')  # Maximize the main window
 
 # Load and process background image (increased blur)
 image = Image.open("clg.jpg")
