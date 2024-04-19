@@ -24,7 +24,7 @@ This project implements a registration and login system based on barcode scannin
 1.  **Install Python:** Ensure you have Python 3.x installed on your machine. [Download Python](https://www.python.org/downloads/)
 2.  **Install Required Libraries:** Use pip to install the necessary libraries:
     ```bash
-    pip install opencv-python pyzbar Pilow
+    pip install opencv-python pyzbar pillow
     ```
 3.  **Project Files:**
     *   **`main.py`:**  This is the main file that runs the application.
