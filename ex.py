@@ -81,7 +81,7 @@ def create_app_window(user_name):
     canvas.create_window((0, 0), window=images_frame, anchor=tk.NW)
 
     # Add images to the frame
-    for i in range(10):  # Add 10 sample images
+    for i in range(1):  # Add 10 sample images
         image_path = f"image_{i}.jpeg"  # Replace with the path of your images
         img = Image.open(image_path)
         img.thumbnail((200, 200))  # Resize images to fit the frame
