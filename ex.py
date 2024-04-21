@@ -161,10 +161,19 @@ def create_app_window(user_name):
             tk.Label(att_frame, text="20", font=("Arial", 12), bg="#ecf0f1").grid(row=i, column=1)
             tk.Label(att_frame, text=str(attended_lectures), font=("Arial", 12), bg="#ecf0f1").grid(row=i, column=2)
             tk.Label(att_frame, text=f"{attendance_percentage:.2f}%", font=("Arial", 12), bg="#ecf0f1").grid(row=i, column=3)
+
+    # Function to handle logout
+    def logout():
+        app_window.destroy()
     # Function to clear the frame
     def clear_frame():
         for widget in main_content_frame.winfo_children():
             widget.destroy()
+
+    
+
+
+   
 
     # --- Header Frame ---
     header_frame = tk.Frame(app_window, bg="#3498db")  
@@ -189,9 +198,7 @@ def create_app_window(user_name):
     update_profile_button = tk.Button(options_bar_frame, text="Update Profile", font=("Arial", 12), bg="#2c3e50", fg="white", bd=0, command=update_profile)
     update_profile_button.pack(pady=5, padx=10, anchor=tk.W)
 
-    # Other features button
-    other_features_button = tk.Button(options_bar_frame, text="Other Features", font=("Arial", 12), bg="#2c3e50", fg="white", bd=0)
-    other_features_button.pack(pady=5, padx=10, anchor=tk.W)
+    
 
     # Result button
     result_button = tk.Button(options_bar_frame, text="Result", font=("Arial", 12), bg="#2c3e50", fg="white", bd=0, command=show_result)
@@ -201,8 +208,13 @@ def create_app_window(user_name):
     att_button = tk.Button(options_bar_frame, text="Attendance", font=("Arial", 12), bg="#2c3e50", fg="white", bd=0, command=show_attendance)
     att_button.pack(pady=5, padx=10, anchor=tk.W)
 
-    # Logout button
-    logout_button = tk.Button(options_bar_frame, text="Logout", font=("Arial", 12), bg="#2c3e50", fg="white", bd=0)
+    # Other features button
+    other_features_button = tk.Button(options_bar_frame, text="Other Features", font=("Arial", 12), bg="#2c3e50", fg="white", bd=0)
+    other_features_button.pack(pady=5, padx=10, anchor=tk.W)
+
+
+     # Logout button
+    logout_button = tk.Button(options_bar_frame, text="Logout", font=("Arial", 12), bg="#2c3e50", fg="white", bd=0, command=logout)
     logout_button.pack(pady=5, padx=10, anchor=tk.W)
 
     # --- Main Content Frame ---
