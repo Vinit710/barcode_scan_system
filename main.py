@@ -4,7 +4,7 @@ import cv2
 from pyzbar.pyzbar import decode
 import csv
 from PIL import Image, ImageTk, ImageFilter
-from app_window import create_app_window  # Import the function
+from ex import create_app_window  # Import the function
 
 def register_user():
     register_window = tk.Toplevel(root)
