@@ -15,7 +15,23 @@ def create_app_window(user_name):
             writer = csv.writer(file)
             writer.writerow([name, class_, roll_no, pnr_no, phone_no])
         messagebox.showinfo("Success", "Profile Updated Successfully!")
+    
+    def update_csv_name(old_name,name):
+    # Read all data from barcodes.csv
+                rows = []
+                with open('barcodes.csv', mode='r') as file:
+                    reader = csv.reader(file)
+                    rows = list(reader)
 
+            # Update the relevant row
+                for row in rows:
+                    if len(row) >= 2 and row[1].strip() == old_name:
+                        row[1] = name
+
+            # Write the updated data back to barcodes.csv
+                with open('barcodes.csv', mode='w', newline='') as file:
+                    writer = csv.writer(file)
+                    writer.writerows(rows)
     # Function to handle Update Profile button click
     def update_profile():
         # Clear previous profile update frame if exists
@@ -55,6 +71,7 @@ def create_app_window(user_name):
             phone_no = phone_no_entry.get()
             if name and class_ and roll_no and pnr_no and phone_no:
                 save_to_csv(name, class_, roll_no, pnr_no, phone_no)
+                update_csv_name(user_name, name)
                 update_frame.destroy()
             else:
                 messagebox.showwarning("Incomplete Data", "Please fill in all fields.")
@@ -235,5 +252,5 @@ def create_app_window(user_name):
 
     return app_window   
 
-# Example usage
-create_app_window("John Doe").mainloop()
+
+
