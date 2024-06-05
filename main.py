@@ -172,10 +172,13 @@ def capture_frames(mode, name_entry):
 
 
 def open_app_window(user_name):
-    root.destroy()
     global app_window
+    root.destroy()
+    
     app_window = create_app_window(user_name)  # Create the app window
     app_window.mainloop()  # Start the event loop for the app window
+    
+    
 
     
 
